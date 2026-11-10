@@ -19,10 +19,7 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--ac);z-index:10}
-#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--ac);color:#fff;display:flex;justify-content:space-between;align-items:baseline;padding:10px 16px}
-#bar b{font-size:22px}
-.w{max-width:720px;margin:0 auto;padding:14px 14px 28px}
+.w{max-width:720px;margin:0 auto;padding:40px 14px 28px}
 .c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
 h2{font-size:15px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
 h2 i{font-style:normal;background:var(--ac2);color:var(--ac);width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;font-size:12px}
@@ -45,16 +42,57 @@ details{margin-top:6px}summary{cursor:pointer;color:var(--ac);font-size:13px}
 .neg{color:var(--neg)}.ok{color:var(--ok)}
 #sv{width:100%;padding:13px;border:0;border-radius:12px;background:var(--ac);color:#fff;font:600 16px inherit;margin:2px 0 8px}
 #md{position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.85);overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 12px) 12px calc(env(safe-area-inset-bottom,0px) + 12px);text-align:center}
+#poster{position:fixed;left:-9999px;top:0;width:390px;padding:26px 22px 22px;overflow:hidden;background:linear-gradient(165deg,#e8f2ff 0%,#a9cffc 55%,#6aa8f7 100%);--card:#fff;--tx:#1b2130;--mu:#6b7385;--bd:#e3e6ec;--neg:#d6403a;--ok:#16794c;color:var(--tx)}
+#poster::before,#poster::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.45)}
+#poster::before{width:220px;height:220px;right:-70px;top:-80px}
+#poster::after{width:180px;height:180px;left:-70px;bottom:-60px}
+#poster>*{position:relative;z-index:1}
+.ph{display:flex;align-items:center;gap:12px;color:#12306b;margin-bottom:16px}
+.ph img{width:44px;height:44px;border-radius:11px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ph b{display:block;font-size:18px}.ph small{opacity:.85;font-size:12px}
+#poster .c{margin:0;box-shadow:0 10px 28px rgba(20,60,160,.25);border:0}
+.pf{color:#2a4a8a;text-align:center;font-size:12px;margin-top:16px}
+.li{display:flex;align-items:center;gap:8px;padding:13px 2px;border-bottom:1px solid var(--bd);font-size:16px}
+.li:last-child{border-bottom:0}
+.li>span:first-child{flex:0 0 auto}
+.li input[type=number]{flex:1;min-width:0;border:0;background:transparent;text-align:right;font-size:20px;font-weight:600;padding:0;color:var(--tx)}
+.li input[type=number]:focus{outline:0}
+.tap{cursor:pointer}.val{flex:1;text-align:right;color:var(--ac);font-weight:600}.ch{font-style:normal;color:var(--mu);font-size:20px}
+.list{padding:2px 14px}
+.pt{font-size:20px;margin:4px 2px 12px;font-weight:700}
+.sh{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;background:rgba(0,0,0,.45)}
+.sh.hide{display:none}
+.sp{background:var(--card);width:100%;max-width:720px;margin:0 auto;border-radius:18px 18px 0 0;padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 16px);max-height:85vh;overflow:auto}
+.st{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.done{border:0;background:var(--ac);color:#fff;border-radius:8px;padding:6px 16px;font:inherit;font-weight:600}
+.rc{padding:0;overflow:hidden}
+.hero{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;text-align:center;padding:14px 10px}
+.hero small{opacity:.88;font-size:12px}.hero b{display:block;font-size:30px;line-height:1.25}
+#res,.rc>.hero+div{padding:12px 14px 14px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ct{font-size:12px;color:var(--mu);font-weight:600;padding-bottom:4px;border-bottom:2px solid var(--ac2);margin-bottom:2px}
+.kr{display:flex;justify-content:space-between;gap:4px;font-size:13px;padding:4px 0}
+.kr b{font-weight:600;white-space:nowrap}
+.kr small{color:var(--mu);font-size:11px;margin-left:3px}
+.bs{font-size:11px;color:var(--mu);margin-top:8px;text-align:center}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+.row{grid-template-columns:repeat(auto-fit,minmax(112px,1fr))}
+.kr span{white-space:nowrap}
+@media (max-width:340px){.cols{grid-template-columns:1fr;gap:14px}.hero b{font-size:26px}}
 </style>
 </head>
 <body>
-<div id="bar"><span>税后工资（月）</span><b id="bv">¥0.00</b></div>
 <div class="w">
 
-<div class="c"><h2><i>1</i>工资</h2>
-<div class="f"><span>月工资（元）</span><input type="number" id="g" value="10000" min="0"></div></div>
+<h1 class="pt">工资税后计算器（广州）</h1>
+<div class="c list">
+<label class="li"><span>月工资（元）</span><input type="number" id="g" value="10000" min="0" inputmode="decimal"></label>
+<div class="li tap" data-sh="shS"><span>社保</span><span class="val" id="vS"></span><i class="ch">›</i></div>
+<div class="li tap" data-sh="shF"><span>公积金</span><span class="val" id="vF"></span><i class="ch">›</i></div>
+</div>
 
-<div class="c"><h2><i>2</i>社保（养老 / 医疗 / 失业）</h2>
+<div class="sh hide" id="shS"><div class="sp"><div class="st"><b>社保（养老 / 医疗 / 失业）</b><button class="done">完成</button></div>
 <div class="seg">
 <label><input type="radio" name="sm" value="min">按广州最低基数</label>
 <label><input type="radio" name="sm" value="full" checked>按正常工资</label>
@@ -74,9 +112,9 @@ details{margin-top:6px}summary{cursor:pointer;color:var(--ac);font-size:13px}
 <div class="f"><span>医疗 单位 %（含生育）</span><input type="number" id="em" value="6" step="0.1"></div>
 <div class="f"><span>失业 单位 %</span><input type="number" id="eu" value="0.8" step="0.1"></div>
 <div class="f"><span>工伤 单位 %（0.2–1.4）</span><input type="number" id="ei" value="0.2" step="0.1"></div>
-</div></details></div>
+</div></details></div></div>
 
-<div class="c"><h2><i>3</i>公积金</h2>
+<div class="sh hide" id="shF"><div class="sp"><div class="st"><b>公积金</b><button class="done">完成</button></div>
 <div class="seg">
 <label><input type="radio" name="fm" value="y" checked>有</label>
 <label><input type="radio" name="fm" value="n">无</label>
@@ -85,16 +123,17 @@ details{margin-top:6px}summary{cursor:pointer;color:var(--ac);font-size:13px}
 <div class="f"><span>个人比例（5%–12%）</span><input type="number" id="fr" value="5" min="5" max="12" step="1"></div>
 <div class="f"><span>单位比例（5%–12%）</span><input type="number" id="fer" value="5" min="5" max="12" step="1"></div>
 <div class="f"><span>缴存基数（0 = 同社保口径工资）</span><input type="number" id="fb" value="0" min="0"></div>
-</div></div>
+</div></div></div>
 
-<div class="c" id="cap"><div class="big"><small>税后工资</small><b id="big"></b></div><div id="res"></div></div>
+<div class="c rc" id="cap"><div class="hero"><small>税后工资（月）</small><b id="big"></b></div><div id="res"></div></div>
 
 <button id="sv">📷 保存结果到相册（图片）</button>
 <div class="n" style="text-align:center;margin:0 0 14px">保存不了？<a href="#" id="pv" style="color:var(--ac)">预览图片，长按保存</a></div>
 
-<div class="n">结果仅供估算。个税按累计预扣法，基本减除 5000 元/月（未含专项附加扣除），个税显示为首月；工资不变时月份越靠后个税越高。社保、公积金的基数与比例以广州官方最新标准为准，可在 2 中修改；公积金未做基数上下限处理，且假设个人部分全额税前扣除。</div>
+<div class="n">结果仅供估算。个税按累计预扣法，基本减除 5000 元/月（未含专项附加扣除），个税显示为首月；工资不变时月份越靠后个税越高。社保、公积金的基数与比例以广州官方最新标准为准，可在社保、公积金面板中修改；公积金未做基数上下限处理，且假设个人部分全额税前扣除。</div>
 </div>
 
+<div id="poster"></div>
 <div id="md" class="hide">
 <div style="color:#fff;margin-bottom:8px">长按图片 → 保存到相册</div>
 <img id="mi" alt="工资明细" style="max-width:100%;border-radius:8px">
@@ -113,30 +152,36 @@ const kv=(k,x,c)=>'<div class="kv"><span>'+k+'</span><b class="'+(c||'')+'">'+(c
 function calc(){
  const g=v('g'),sm=r('sm'),fm=r('fm');
  $('fundBox').classList.toggle('hide',fm==='n');
+ $('vS').textContent=sm==='min'?'按广州最低基数':'按正常工资';
+ $('vF').textContent=fm==='n'?'无':'个人 '+v('fr')+'% · 单位 '+v('fer')+'%';
  const bP=sm==='min'?v('pl'):clamp(g,v('pl'),v('pu')),bM=sm==='min'?v('ml'):clamp(g,v('ml'),v('mu')),bU=sm==='min'?v('ul'):clamp(g,v('ul'),v('uu'));
  const pen=bP*v('pr')/100,med=bM*v('mr')/100,une=bU*v('ur')/100,si=pen+med+une;
  const fb=v('fb')>0?v('fb'):(sm==='min'?v('pl'):g);
  const fund=fm==='y'?fb*clamp(v('fr'),5,12)/100:0,efund=fm==='y'?fb*clamp(v('fer'),5,12)/100:0;
  const ep=bP*v('ep')/100,em=bM*v('em')/100,eu=bU*v('eu')/100,ei=bP*v('ei')/100,esi=ep+em+eu+ei;
  const m1=g-si-fund-5000,t1=tax(m1),net=g-si-fund-t1;
-  let h='<div class="sec" style="margin-top:4px">个人承担部分</div>'+
-  kv('税前工资',g)+kv('养老保险（基数 '+f2(bP)+'）',pen,'neg')+kv('医疗保险（基数 '+f2(bM)+'）',med,'neg')+kv('失业保险（基数 '+f2(bU)+'）',une,'neg')+kv('住房公积金',fund,'neg')+kv('个人所得税',t1,'neg')+
-  kv('社保个税合计',si+t1,'neg')+kv('税后工资',net,'ok');
- h+='<div class="sec">单位承担部分</div>'+kv('养老保险（单位）',ep)+kv('医疗保险（单位，含生育）',em)+kv('失业保险（单位）',eu)+kv('工伤保险（单位）',ei)+kv('住房公积金（单位）',efund)+
-  kv('单位五险一金小计',esi+efund)+kv('单位用工成本（工资 + 单位五险一金）',g+esi+efund);
- $('res').innerHTML=h;$('big').textContent='¥'+f2(net);$('bv').textContent='¥'+f2(net);
+  const kk=(k,x,c)=>'<div class="kr"><span>'+k+'</span><b class="'+(c||'')+'">'+f2(x)+'</b></div>';
+ const L=kk('税前工资',g)+kk('养老'+'<small>'+v('pr')+'%</small>',pen)+kk('医疗'+'<small>'+v('mr')+'%</small>',med)+kk('失业'+'<small>'+v('ur')+'%</small>',une)+kk('公积金'+(fm==='y'?'<small>'+clamp(v('fr'),5,12)+'%</small>':''),fund)+kk('个税',t1)+kk('社保个税合计',si+t1,'neg');
+ const R=kk('养老'+'<small>'+v('ep')+'%</small>',ep)+kk('医疗'+'<small>'+v('em')+'%</small>',em)+kk('失业'+'<small>'+v('eu')+'%</small>',eu)+kk('工伤'+'<small>'+v('ei')+'%</small>',ei)+kk('公积金'+(fm==='y'?'<small>'+clamp(v('fer'),5,12)+'%</small>':''),efund)+kk('五险一金小计',esi+efund)+kk('用工成本',g+esi+efund);
+ $('res').innerHTML='<div class="cols"><div><div class="ct">个人承担</div>'+L+'</div><div><div class="ct">单位承担</div>'+R+'</div></div><div class="bs">基数：养老 '+f2(bP)+' · 医疗 '+f2(bM)+' · 失业 '+f2(bU)+'</div>';$('big').textContent='¥'+f2(net);
 }
 document.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));
+document.querySelectorAll('input[type=number]').forEach(e=>{let old='';
+ e.addEventListener('focus',()=>{old=e.value;e.placeholder=old;e.value=''});
+ e.addEventListener('blur',()=>{if(e.value==='')e.value=old;calc()})});
+document.querySelectorAll('.tap').forEach(t=>t.onclick=()=>$(t.dataset.sh).classList.remove('hide'));
+document.querySelectorAll('.sh').forEach(sh=>sh.addEventListener('click',e=>{if(e.target===sh||e.target.classList.contains('done'))sh.classList.add('hide')}));
 async function gen(preview){
  const b=$('sv'),old=b.textContent;b.disabled=true;b.textContent='生成中…';
  try{
-  const cv=await html2canvas($('cap'),{scale:2,backgroundColor:getComputedStyle(document.body).backgroundColor});
+  $('poster').innerHTML='<div class="ph"><img src="'+document.querySelector('link[rel=icon]').href+'"><div><b>工资税后明细</b><small>广州 · '+new Date().toLocaleDateString('zh-CN')+'</small></div></div>'+$('cap').outerHTML.replace(/ id="[^"]*"/g,'')+'<div class="pf">估算结果，仅供参考，以公司工资条为准</div>';
+  const cv=await html2canvas($('poster'),{scale:3,backgroundColor:null});
   let done=false;
   if(!preview){
-   const blob=await new Promise(ok=>cv.toBlob(ok,'image/png'));
-   try{const dl=window.claude?await claude.use('downloads'):null;if(dl){await dl.save({filename:'工资明细.png',data:blob});done=true}}catch(e){if(e&&e.code==='declined')done=true}
+   const blob=await new Promise(ok=>cv.toBlob(ok,'image/jpeg',.95));
+   try{const dl=window.claude?await claude.use('downloads'):null;if(dl){await dl.save({filename:'工资明细.jpg',data:blob});done=true}}catch(e){if(e&&e.code==='declined')done=true}
   }
-  if(!done){$('mi').src=cv.toDataURL('image/png');$('md').classList.remove('hide')}
+  if(!done){$('mi').src=cv.toDataURL('image/jpeg',.95);$('md').classList.remove('hide')}
  }catch(e){alert('生成图片失败，请重试')}
  b.disabled=false;b.textContent=old;
 }
